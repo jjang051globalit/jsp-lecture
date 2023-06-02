@@ -151,3 +151,14 @@
 0:0:0:0:0:0:0:1 - - [02/Jun/2023:14:06:02 +0900] "GET /jsp01/GugudanResult?dan=7&dan=9 HTTP/1.1" 200 388
 0:0:0:0:0:0:0:1 - - [02/Jun/2023:14:10:36 +0900] "GET /jsp01/GugudanCheckbox HTTP/1.1" 200 901
 0:0:0:0:0:0:0:1 - - [02/Jun/2023:14:10:43 +0900] "GET /jsp01/GugudanResult?dan=3&dan=4&dan=5 HTTP/1.1" 200 386
+127.0.0.1 - - [02/Jun/2023:14:13:26 +0900] "GET / HTTP/1.1" 404 807
+0:0:0:0:0:0:0:1 - - [02/Jun/2023:14:13:27 +0900] "GET /jsp01/GugudanCheckbox HTTP/1.1" 200 909
+0:0:0:0:0:0:0:1 - - [02/Jun/2023:14:13:33 +0900] "GET /jsp01/GugudanResultCheckbox?dan=5&dan=6&dan=7 HTTP/1.1" 200 388
+0:0:0:0:0:0:0:1 - - [02/Jun/2023:14:15:44 +0900] "GET /jsp01/GugudanCheckbox HTTP/1.1" 200 909
+0:0:0:0:0:0:0:1 - - [02/Jun/2023:14:16:00 +0900] "GET /jsp01/GugudanResultCheckbox?dan=2&dan=4&dan=6&dan=8 HTTP/1.1" 200 385
+127.0.0.1 - - [02/Jun/2023:14:35:31 +0900] "GET / HTTP/1.1" 404 807
+0:0:0:0:0:0:0:1 - - [02/Jun/2023:14:35:31 +0900] "GET /jsp01/GugudanCheckbox HTTP/1.1" 200 909
+0:0:0:0:0:0:0:1 - - [02/Jun/2023:14:35:36 +0900] "GET /jsp01/GugudanResultCheckbox?dan=4&dan=6&dan=8 HTTP/1.1" 200 725
+0:0:0:0:0:0:0:1 - - [02/Jun/2023:14:43:39 +0900] "GET /jsp01/GugudanCheckbox HTTP/1.1" 200 909
+0:0:0:0:0:0:0:1 - - [02/Jun/2023:14:43:46 +0900] "GET /jsp01/GugudanResultCheckbox?dan=1&dan=2&dan=3&dan=4&dan=5 HTTP/1.1" 200 1050
+0:0:0:0:0:0:0:1 - - [02/Jun/2023:14:44:15 +0900] "GET /jsp01/GugudanResultCheckbox?dan=1&dan=2&dan=3&dan=4&dan=5&dan=6&dan=7&dan=8&dan=9 HTTP/1.1" 200 1726

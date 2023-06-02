@@ -23,9 +23,9 @@ public class GugudanResultCheckbox extends HttpServlet {
 //		System.out.println(dans[0]);
 //		System.out.println(dans[1]);
 //		System.out.println(dans[2]);
-		for(String item:dans) {
-			System.out.println(item);
-		}
+//		for(String item:dans) {
+//			System.out.println(item);
+//		}
 		
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
@@ -37,11 +37,13 @@ public class GugudanResultCheckbox extends HttpServlet {
 		out.println("</head>");
 		out.println("<body>");
 		//
-		
-		out.println("<h1>"+dan+"단을 출력합니다.</h1>");
-		for(int i=1;i<10;i++) {
-			out.println("<p>"+dan+"x"+i+"="+dan*i+"</p>");
-		}
+		for(String item:dans) {
+			//int num = Integer.parseInt(item); 
+			out.println("<h1>"+item+"단을 출력합니다.</h1>");
+			for(int i=1;i<10;i++) {
+				out.println("<p>"+item+"x"+i+"="+Integer.parseInt(item)*i+"</p>");
+			}
+		 }
 		//
 		out.println("<a href='javascript:history.back()'>뒤로가기</a>");
 		out.println("<a href='GugudanForm'>GugudanForm</a>");
