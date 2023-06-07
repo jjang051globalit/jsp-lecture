@@ -2,6 +2,8 @@
 <%
 	String loggedUserId = (String) session.getAttribute("loggedUserId");
 	String loggedUserName = (String) session.getAttribute("loggedUserName");
+	
+	//pageContext < requset < session < applicationContext
 %>
 
 
