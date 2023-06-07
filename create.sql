@@ -1,4 +1,7 @@
 -- 명령어 쓸 수 있음...
+
+
+
 create table member (
     id         varchar2(100),
     name       varchar2(100),

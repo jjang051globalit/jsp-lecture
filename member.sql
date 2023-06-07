@@ -1,9 +1,13 @@
 drop table member;
 
 create table member(
-    id         varchar2(100) not null,
-    name       varchar2(100),
-    password   varchar2(100)
+    id               varchar2(100) not null,
+    name             varchar2(100),
+    password         varchar2(100),
+    zonecode         number,
+    address          varchar2(300),
+    detailaddress    varchar2(100),
+    extraaddress     varchar2(100)
 );
 -- Create  Read  Update  Delete   
 insert into member (id,password,name) values ('jjang052','1234','¿Âµø∞«');
