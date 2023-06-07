@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%> <%@ include file = "include/header.jsp" %>
-<body>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%> 
+<%@ include file = "include/header.jsp" %>
   <form action="join-process.jsp" method="post" class="join">
     <div class="container-sm mt-5">
       <div class="row justify-content-center">
@@ -17,19 +17,19 @@
             <label for="floatingName">Name</label>
           </div>
           <div class="input-group mb-3">
-            <input type="text" class="form-control-lg" id="zonecode" placeholder="우편번호" name="zonecode" readonly />
-            <button class="btn btn-secondary" type="button" id="button-addon2" onclick="searchZonecode()">Button</button>
+            <input type="text" class="form-control form-control-lg" id="zonecode" placeholder="우편번호" name="zonecode" readonly />
+            <button class="btn btn-secondary" type="button" id="button-addon2" onclick="searchZonecode()">우편번호</button>
           </div>
           <div class="form-floating mb-3">
             <input type="text" name="userAddress" class="form-control address" id="floatingAddress" placeholder="주소를 입력해 주세요." />
             <label for="floatingAddress">Address</label>
           </div>
-          <div class="row mb-3">
+          <div class="row mb-3 g-2">
             <div class="col">
-              <input type="text" class="form-control-lg detailAddress" placeholder="상세주소" name="detailAddress" />
+              <input type="text" class="form-control form-control-lg detailAddress" placeholder="상세주소" name="detailAddress" />
             </div>
             <div class="col">
-              <input type="text" class="form-control-lg extraAddress" placeholder="참고사항" name="extraAddress" />
+              <input type="text" class="form-control form-control-lg extraAddress" placeholder="참고사항" name="extraAddress" />
             </div>
           </div>
           <div class="text-center">

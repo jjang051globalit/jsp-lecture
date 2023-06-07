@@ -37,15 +37,12 @@
 		String userPw = rs.getString("password");
 		String userName = rs.getString("name");
 		
-		//out.println("로그인 성공");
-		// 직접 주소창을 바꾸는 거
-		pageContext.setAttribute("pageUserId", userId);
-		request.setAttribute("userId", userId);
-		session.setAttribute("userId", userId);
-		/* RequestDispatcher dispatcher =  request.getRequestDispatcher("login-ok.jsp");
-		dispatcher.forward(request, response); */
-		//response.sendRedirect("login-ok.jsp?userId="+userId);
-		System.out.println(request.getParameter(userId));
+		
+		//request.setAttribute("userId", userId);
+		session.setAttribute("loggedUserId", userId);
+		session.setAttribute("loggedUserName", userName);
+		
+		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("login-ok.jsp");
 		dispatcher.forward(request, response);
 		//request.getRequestDispatcher("login-ok.jsp").forward(request, response);
@@ -54,8 +51,6 @@
 		out.println("로그인 실패");
 	}
 %>
-
-
 
 
 
