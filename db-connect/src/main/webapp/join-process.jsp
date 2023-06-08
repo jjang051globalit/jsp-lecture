@@ -9,6 +9,8 @@
 	String pUserId = request.getParameter("userId");
 	String pUserPw = request.getParameter("userPw");
 	String pUserName = request.getParameter("userName");
+	String pUserEmail = request.getParameter("userEmail");
+	
 	int pZonecode = Integer.parseInt(request.getParameter("zonecode"));
 	String pUserAddress = request.getParameter("userAddress");
 	String pDetailAddress = request.getParameter("detailAddress");
@@ -25,7 +27,7 @@
 	PreparedStatement pstmt = null;
 	ResultSet rs = null;
 	
-	String sql = "insert into member values (?,?,?,?,?,?,?)";
+	String sql = "insert into member values (?,?,?,?,?,?,?,?)";
 	
 	Class.forName(driver);
 	conn = DriverManager.getConnection(url, id, pw);
@@ -33,10 +35,11 @@
 	pstmt.setString(1, pUserId);
 	pstmt.setString(2, pUserName);
 	pstmt.setString(3, pUserPw);
-	pstmt.setInt(4, pZonecode);
-	pstmt.setString(5, pUserAddress);
-	pstmt.setString(6, pDetailAddress);
-	pstmt.setString(7, pExtraAddress);
+	pstmt.setString(4, pUserEmail);
+	pstmt.setInt(5, pZonecode);
+	pstmt.setString(6, pUserAddress);
+	pstmt.setString(7, pDetailAddress);
+	pstmt.setString(8, pExtraAddress);
 	
 	int result = pstmt.executeUpdate(); // select 를 제외한 나머지 update, delete , insert
 	if(result > 0) {

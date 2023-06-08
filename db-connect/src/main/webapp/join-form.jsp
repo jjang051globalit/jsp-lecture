@@ -4,31 +4,40 @@
     <div class="row justify-content-center">
       <div class="col-6">
         <div class="input-group mb-3">
-          <input type="text" name="userId" class="form-control form-control-lg userId" id="floatingInput" placeholder="아이디를 입력해 주세요." />
+          <input type="text" name="userId" class="form-control userId" id="floatingInput" placeholder="아이디를 입력해 주세요." />
           <button class="btn btn-secondary" type="button" id="btnIdCheck">ID중복체크</button>
         </div>
-        <div class="form-floating mb-3">
-          <input type="password" name="userPw" class="form-control" id="floatingPassword" placeholder="Password" />
+        <div class="mb-3">
           <label for="floatingPassword">Password</label>
+          <input type="password" name="userPw" class="form-control" id="floatingPassword" placeholder="Password" />
         </div>
-        <div class="form-floating mb-3">
-          <input type="text" name="userName" class="form-control" id="floatingName" placeholder="이름을 입력해 주세요." />
+        <div class="mb-3">
+          <label for="floatingPassword02">Password 확인</label>
+          <input type="password" name="userPw02" class="form-control" id="floatingPassword02" placeholder="Password" />
+        </div>
+        <div class="mb-3">
           <label for="floatingName">Name</label>
+          <input type="text" name="userName" class="form-control" id="floatingName" placeholder="이름을 입력해 주세요." />
         </div>
+        <div class="mb-3">
+          <label for="floatingMail">Email</label>
+          <input type="text" name="userEmail" class="form-control" id="floatingMail" placeholder="이메일을 입력해 주세요." />
+        </div>
+
         <div class="input-group mb-3">
-          <input type="text" class="form-control form-control-lg" id="zonecode" placeholder="우편번호" name="zonecode" readonly />
+          <input type="text" class="form-control" id="zonecode" placeholder="우편번호" name="zonecode" readonly />
           <button class="btn btn-secondary" type="button" id="button-addon2" onclick="searchZonecode()">우편번호</button>
         </div>
-        <div class="form-floating mb-3">
-          <input type="text" name="userAddress" class="form-control address" id="floatingAddress" placeholder="주소를 입력해 주세요." />
+        <div class="mb-3">
           <label for="floatingAddress">Address</label>
+          <input type="text" name="userAddress" class="form-control address" id="floatingAddress" placeholder="주소를 입력해 주세요." />
         </div>
         <div class="row mb-3 g-2">
           <div class="col">
-            <input type="text" class="form-control form-control-lg detailAddress" placeholder="상세주소" name="detailAddress" />
+            <input type="text" class="form-control detailAddress" placeholder="상세주소" name="detailAddress" />
           </div>
           <div class="col">
-            <input type="text" class="form-control form-control-lg extraAddress" placeholder="참고사항" name="extraAddress" />
+            <input type="text" class="form-control extraAddress" placeholder="참고사항" name="extraAddress" />
           </div>
         </div>
         <div class="text-center">
@@ -39,6 +48,7 @@
   </div>
 </form>
 <script>
+  const regEmail = /^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
   const userId = document.querySelector(".userId");
   const btnIdCheck = document.querySelector("#btnIdCheck");
   const btnSubmit = document.querySelector("#btnSubmit");
@@ -47,31 +57,47 @@
   console.log(joinForm.elements.userId);
   let isDoubleCheck = false;
   btnSubmit.addEventListener("click", (e) => {
-    if (joinForm.elements.userId.value === "") {
+    //e.preventDefault();
+    if (joinForm.elements.userId.value.trim() === "") {
       e.preventDefault();
       alert("아이디를 입력하세요.");
       //return false;
-    } else if (joinForm.elements.userPw.value === "") {
+    } else if (joinForm.elements.userPw.value.trim() === "") {
       e.preventDefault();
       alert("비밀번호를 입력하세요.");
+      joinForm.elements.userPw.value = "";
+      joinForm.elements.userPw.focus();
       //return false;
-    } else if (joinForm.elements.userName.value === "") {
+    } else if (joinForm.elements.userName.value.trim() === "") {
       e.preventDefault();
       alert("이름을 입력하세요.");
+      joinForm.elements.userName.value = "";
+      joinForm.elements.userName.focus();
       //return false;
-    } else if (joinForm.elements.zonecode.value === "") {
+    } else if (joinForm.elements.userEmail.value.trim() === "") {
+      e.preventDefault();
+      alert("이메일을 입력하세요.");
+      joinForm.elements.userEmail.value = "";
+      joinForm.elements.userEmail.focus();
+    } else if (joinForm.elements.userEmail.value.trim().match(regEmail) === null) {
+    	e.preventDefault();
+      	alert("이메일을 형식에 맞게 입력하세요.");
+    } else if (joinForm.elements.zonecode.value.trim() === "") {
       e.preventDefault();
       alert("우편번호를 입력하세요.");
+      joinForm.elements.zonecode.focus();
       //return false;
-    } else if (joinForm.elements.address.value === "") {
+    } else if (joinForm.elements.userAddress.value.trim() === "") {
       e.preventDefault();
       alert("주소를 입력하세요.");
+      joinForm.elements.userAddress.focus();
       //return false;
     }
-    if(isDoubleCheck===false) {
-    	e.preventDefault();
-    	alert("아이디 중복체크해주세요.");
-    	joinForm.elements.userId.focus();
+    console.log(isDoubleCheck);
+    if (isDoubleCheck === false) {
+      e.preventDefault();
+      alert("아이디 중복체크해주세요.");
+      joinForm.elements.userId.focus();
     }
   });
   btnIdCheck.addEventListener("click", () => {
@@ -83,8 +109,14 @@
       .then((data) => {
         //console.log(data);
         if (data.isOk) {
-          alert("쓸 수 있는 아이디입니다.");
-          isDoubleCheck = true;
+          const result = confirm("쓸 수 있는 아이디입니다. 사용하시겠습니까?");
+          if (result) {
+            joinForm.elements.userId.setAttribute("readonly", true);
+            isDoubleCheck = true;
+          } else {
+            joinForm.elements.userId.value = "";
+            joinForm.elements.userId.focus();
+          }
         } else {
           alert("쓸 수 없는 아이디입니다.");
           userId.value = "";
@@ -141,5 +173,8 @@
       },
     }).open();
   }
+
+  // const testEmail = "jjang051@hanmail.net";
+  // console.log(testEmail.match(regEmail));
 </script>
 <%@ include file="include/footer.jsp"%>

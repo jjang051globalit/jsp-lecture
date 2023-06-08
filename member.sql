@@ -7,6 +7,7 @@ create table member(
     -- id               varchar2(100) primary key,
     name             varchar2(100) not null,
     password         varchar2(100) not null,
+    email            varchar2(100) not null,
     zonecode         number(5) not null,
     address          varchar2(300) not null,
     detailaddress    varchar2(100),
@@ -21,6 +22,8 @@ commit;
 rollback;
 --transaction
 select * from member;
+select count(*) as count from member where id = 'kim';
+
 select id,name,password from member;
 select * from member where id = 'jjang051' and password = '1234';
 
