@@ -77,6 +77,7 @@
   </table>
   <div class="mt-5">
     <a href="modify.jsp" class="btn btn-info">회원 정보 수정</a>
+    <a href="modify-password.jsp" class="btn btn-info">비밀번호 변경</a>
     <a href="delete.jsp" class="btn btn-danger">회원 탈퇴</a>
   </div>
 </div>
