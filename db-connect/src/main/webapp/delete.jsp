@@ -7,7 +7,7 @@
 			<div class="col-6">
 				<div class="form-floating mb-3">
 					<input type="text" name="userId" class="form-control"
-						id="floatingInput" placeholder="아이디를 입력해 주세요." value="jjang051"
+						id="floatingInput" placeholder="아이디를 입력해 주세요." value="<%= session.getAttribute("loggedUserId") %>"
 						readonly /> <label for="floatingInput">ID</label>
 				</div>
 				<div class="form-floating mb-3">

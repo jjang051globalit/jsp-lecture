@@ -4,9 +4,9 @@
     <div class="container-sm mt-5">
       <div class="row justify-content-center">
         <div class="col-6">
-          <div class="form-floating mb-3">
-            <input type="text" name="userId" class="form-control" id="floatingInput" placeholder="아이디를 입력해 주세요." />
-            <label for="floatingInput">ID</label>
+          <div class="input-group mb-3">
+            <input type="text" name="userId"  class="form-control form-control-lg userId" id="floatingInput" placeholder="아이디를 입력해 주세요." />
+            <button class="btn btn-secondary" type="button" id="btnIdCheck">ID중복체크</button>
           </div>
           <div class="form-floating mb-3">
             <input type="password" name="userPw" class="form-control" id="floatingPassword" placeholder="Password" />
@@ -40,6 +40,26 @@
     </div>
   </form>
   <script>
+  	const userId = document.querySelector(".userId");
+    const btnIdCheck = document.querySelector("#btnIdCheck");
+    btnIdCheck.addEventListener("click",()=>{
+    	//console.log(`idCheck.jsp?userId=${userId.value}`);
+      fetch("idCheck.jsp?userId="+userId.value)
+      .then((response)=>{
+        return response.json();
+      })
+      .then((data)=>{
+        //console.log(data);
+        if(data.isOk) {
+        	alert("쓸 수 있는 아이디입니다.");
+        } else {
+        	alert("쓸 수 없는 아이디입니다.");
+        	userId.value="";
+        	userId.focus();
+        }
+      })
+    });
+
     function searchZonecode() {
       new daum.Postcode({
         oncomplete: function (data) {
