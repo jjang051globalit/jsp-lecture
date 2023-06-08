@@ -21,7 +21,7 @@
 	ResultSet rs = null;
 	
 	String sql =  
-			"select id,name,address,lpad(zonecode,5,'0') as changeZonecode,"
+			"select id,name,email,address,lpad(zonecode,5,'0') as changeZonecode,"
 			+ "detailAddress from member where id = ?";
 	
 	Class.forName(driver);
@@ -33,12 +33,14 @@
 	String detailAddress = null;
 	String zonecode = null;
 	String name = null;
+	String email = null;
 	String allAddress =  null;
 	if(rs.next()) {
 		address = rs.getString("address");
 		detailAddress = rs.getString("detailAddress");
 		zonecode = rs.getString("changeZonecode");
 		name = rs.getString("name");
+		email = rs.getString("email");
 		allAddress= address+ " / "+detailAddress;
 	}
 	if(detailAddress==null) detailAddress = "상세주소 없음";
@@ -58,6 +60,11 @@
         <th scope="row">Name</th>
         <td><%= name %></td>
       </tr>
+      <tr>
+        <th scope="row">Email</th>
+        <td><%= email %></td>
+      </tr>
+      
       <tr>
         <th scope="row">주소</th>
         <td><%= address +" / "+ detailAddress %></td>

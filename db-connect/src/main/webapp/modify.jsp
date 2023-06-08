@@ -1,43 +1,91 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%> <%@ include file="include/header.jsp"%>
+<%@page import="java.sql.DriverManager"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.PreparedStatement"%>
+<%@page import="java.sql.Connection"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%> 
+<%@ include file="include/header.jsp"%>
+<%
+	String driver = "oracle.jdbc.OracleDriver";
+	String url = "jdbc:oracle:thin:@localhost:1521:xe";
+	String id = "jjang051";
+	String pw = "1234";
+	
+	Connection conn = null;
+	PreparedStatement pstmt = null;
+	ResultSet rs = null;
+	String pLoggedUserId =  (String) session.getAttribute("loggedUserId");
+	String sql =  
+			"select id,name,email,address,lpad(zonecode,5,'0') as changeZonecode,"
+			+ "detailAddress from member where id = "+pLoggedUserId;
+	
+	Class.forName(driver);
+	conn = DriverManager.getConnection(url, id, pw);
+	pstmt = conn.prepareStatement(sql);
+	rs = pstmt.executeQuery();
+	String address = null;
+	String detailAddress = null;
+	String zonecode = null;
+	String name = null;
+	String email = null;
+	String extraAddress =  null;
+	if(rs.next()) {
+		detailAddress = rs.getString("detailAddress");
+		extraAddress = rs.getString("extraAddress");
+		zonecode = rs.getString("changeZonecode");
+		name = rs.getString("name");
+		email = rs.getString("email");
+		address = rs.getString("address");
+	}
+%>
+
 <form action="join-process.jsp" method="post" class="join" name="joinForm">
   <div class="container-sm mt-5">
     <div class="row justify-content-center">
       <div class="col-6">
         <div class="input-group mb-3">
-          <input type="text" name="userId" class="form-control userId" id="floatingInput" placeholder="아이디를 입력해 주세요." />
-          <button class="btn btn-secondary" type="button" id="btnIdCheck">ID중복체크</button>
+          <input type="text" name="userId" class="form-control userId" id="floatingInput" 
+          placeholder="아이디를 입력해 주세요." readonly value = "<%=pLoggedUserId %>" />
         </div>
         <div class="mb-3">
           <label for="floatingPassword">Password</label>
           <input type="password" name="userPw" class="form-control" id="floatingPassword" placeholder="Password" />
         </div>
         <div class="mb-3">
-          <label for="floatingPassword02">Password 확인</label>
-          <input type="password" name="userPw02" class="form-control" id="floatingPassword02" placeholder="Password" />
-        </div>
-        <div class="mb-3">
           <label for="floatingName">Name</label>
-          <input type="text" name="userName" class="form-control" id="floatingName" placeholder="이름을 입력해 주세요." />
+          <input type="text" name="userName" class="form-control" id="floatingName" placeholder="이름을 입력해 주세요."
+          	value = "장성호" 
+           />
         </div>
         <div class="mb-3">
           <label for="floatingMail">Email</label>
-          <input type="text" name="userEmail" class="form-control" id="floatingMail" placeholder="이메일을 입력해 주세요." />
+          <input type="text" name="userEmail" class="form-control" id="floatingMail" placeholder="이메일을 입력해 주세요."
+          	readonly value="jjang051@hanmail.net"
+           />
         </div>
 
         <div class="input-group mb-3">
-          <input type="text" class="form-control" id="zonecode" placeholder="우편번호" name="zonecode" readonly />
+          <input type="text" class="form-control" id="zonecode" placeholder="우편번호" name="zonecode" 
+          readonly
+          value="12345"
+           />
           <button class="btn btn-secondary" type="button" id="button-addon2" onclick="searchZonecode()">우편번호</button>
         </div>
         <div class="mb-3">
           <label for="floatingAddress">Address</label>
-          <input type="text" name="userAddress" class="form-control address" id="floatingAddress" placeholder="주소를 입력해 주세요." />
+          <input type="text" name="userAddress" class="form-control address" id="floatingAddress" placeholder="주소를 입력해 주세요."
+          	value="서울특별시 사당동"
+           />
         </div>
         <div class="row mb-3 g-2">
           <div class="col">
-            <input type="text" class="form-control detailAddress" placeholder="상세주소" name="detailAddress" />
+            <input type="text" class="form-control detailAddress" placeholder="상세주소" name="detailAddress"
+            value="1111"
+             />
           </div>
           <div class="col">
-            <input type="text" class="form-control extraAddress" placeholder="참고사항" name="extraAddress" />
+            <input type="text" class="form-control extraAddress" placeholder="참고사항" name="extraAddress"
+            value="(사당동)"
+             />
           </div>
         </div>
         <div class="text-center">
