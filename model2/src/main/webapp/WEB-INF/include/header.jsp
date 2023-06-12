@@ -30,7 +30,7 @@
 					</c:when>
 					<c:otherwise>
 						<li class="nav-item"><a href="../member/logout" class="nav-link">logout</a></li>
-						<li class="nav-item"><a href="../member/info" class="nav-link">${loggedMember.name }</a></li>
+						<li class="nav-item"><a href="../member/info?userId=${loggedMember.id }" class="nav-link">${loggedMember.name }</a></li>
 					</c:otherwise>	
 				</c:choose>
 				<%-- <c:if test="${empty loggedMember}">

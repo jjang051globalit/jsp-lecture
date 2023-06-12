@@ -105,6 +105,28 @@ public class MemberDao {
 		}
 		return result;
 	}
+
+	public MemberDto getMemberInfo(String userId) {
+		MemberDto infoMemberDto = null;;
+		getConnection();
+		String sql =  "select * from member where id = ?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				infoMemberDto = new MemberDto();
+				infoMemberDto.setId(rs.getString("id"));
+				infoMemberDto.setName(rs.getString("name"));
+				infoMemberDto.setEmail(rs.getString("email"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+		return infoMemberDto;
+	}
 }
 
 

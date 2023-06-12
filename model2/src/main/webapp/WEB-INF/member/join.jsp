@@ -105,6 +105,8 @@
     }
     console.log(isDoubleCheck);
   });
+  
+  
   btnIdCheck.addEventListener("click", () => {
     //console.log(`idCheck.jsp?userId=${userId.value}`);
     fetch("../member/idCheck?userId=" + userId.value)
