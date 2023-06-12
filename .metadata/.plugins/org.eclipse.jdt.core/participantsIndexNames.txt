@@ -3,6 +3,8 @@ C:\Users\y\Desktop\jsp-lecture\.metadata\.plugins\org.eclipse.jst.jsp.core\jspse
 \model2\src\main\java
 C:\Users\y\Desktop\jsp-lecture\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2082080613.index
 \db-connect\src\main\java
+C:\Users\y\Desktop\jsp-lecture\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3040728166.index
+\model2\src\main\java
 C:\Users\y\Desktop\jsp-lecture\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\875471413.index
 \jsp01\src\main\java
 C:\Users\y\Desktop\jsp-lecture\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\237333262.index
