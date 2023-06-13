@@ -8,7 +8,6 @@
 <!-- prettier-ignore -->
 <%
 	//  db 접속
-	
 	String pLoggedUserId =  (String) session.getAttribute("loggedUserId");
 	
 	String driver = "oracle.jdbc.OracleDriver";

@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.jjang051.model.MemberDao;
 import com.jjang051.model.MemberDto;
@@ -20,7 +21,11 @@ public class InfoController extends HttpServlet {
     }
 
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String userId = request.getParameter("userId");
+		//String userId = request.getParameter("userId");
+		HttpSession session = request.getSession();
+		MemberDto memberDto = (MemberDto) session.getAttribute("loggedMember");
+		//System.out.println("userId==="+userId);
+		String userId = memberDto.getId();
 		MemberDao memberDao = new MemberDao();
 		MemberDto infoMemberDto = memberDao.getMemberInfo(userId);
 		request.setAttribute("infoMemberDto", infoMemberDto);

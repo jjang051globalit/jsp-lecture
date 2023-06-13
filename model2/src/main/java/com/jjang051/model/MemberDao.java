@@ -105,7 +105,7 @@ public class MemberDao {
 		}
 		return result;
 	}
-
+	//
 	public MemberDto getMemberInfo(String userId) {
 		MemberDto infoMemberDto = null;;
 		getConnection();
@@ -156,6 +156,21 @@ public class MemberDao {
 			close();
 		}
 		
+		return result;
+	}
+	public int modifyPassword(PasswordDto passwordDto) {
+		int result = 0;
+		getConnection();
+		String sql =  "update member set password = ? where id = ? and password = ?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, passwordDto.getNewUserPw());
+			pstmt.setString(2, passwordDto.getUserId());
+			pstmt.setString(3, passwordDto.getUserPw());
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return result;
 	}
 }
