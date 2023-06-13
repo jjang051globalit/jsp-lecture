@@ -119,6 +119,10 @@ public class MemberDao {
 				infoMemberDto.setId(rs.getString("id"));
 				infoMemberDto.setName(rs.getString("name"));
 				infoMemberDto.setEmail(rs.getString("email"));
+				infoMemberDto.setAddress(rs.getString("address"));
+				infoMemberDto.setZonecode(rs.getInt("zonecode"));
+				infoMemberDto.setDetailAddress(rs.getString("detailAddress"));
+				infoMemberDto.setExtraAddress(rs.getString("extraAddress"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

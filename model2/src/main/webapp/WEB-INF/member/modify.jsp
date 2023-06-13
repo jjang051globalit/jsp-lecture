@@ -1,48 +1,58 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%> 
-<%@ include file="../include/header.jsp"%>
-<form action="../member/joinProcess" method="post" class="join" name="joinForm">
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ include file = "../include/header.jsp"  %>
+<form action="../member/memberModifyProcess" method="post" class="join" name="joinForm">
   <div class="container-sm mt-5">
     <div class="row justify-content-center">
       <div class="col-6">
         <div class="input-group mb-3">
-          <input type="text" name="userId" class="form-control userId" id="floatingInput" placeholder="아이디를 입력해 주세요." />
-          <button class="btn btn-secondary" type="button" id="btnIdCheck">ID중복체크</button>
+          <input type="text" name="userId" class="form-control userId" id="floatingInput" 
+          placeholder="아이디를 입력해 주세요." readonly value = "${infoMemberDto.id }" />
         </div>
         <div class="mb-3">
           <label for="floatingPassword">Password</label>
           <input type="password" name="userPw" class="form-control" id="floatingPassword" placeholder="Password" />
         </div>
         <div class="mb-3">
-          <label for="floatingPassword02">Password 확인</label>
-          <input type="password" name="userPw02" class="form-control" id="floatingPassword02" placeholder="Password" />
-        </div>
-        <div class="mb-3">
           <label for="floatingName">Name</label>
-          <input type="text" name="userName" class="form-control" id="floatingName" placeholder="이름을 입력해 주세요." />
+          <input type="text" name="userName" class="form-control" id="floatingName" placeholder="이름을 입력해 주세요."
+          	value = "${infoMemberDto.name }" 
+           />
         </div>
         <div class="mb-3">
           <label for="floatingMail">Email</label>
-          <input type="text" name="userEmail" class="form-control" id="floatingMail" placeholder="이메일을 입력해 주세요." />
+          <input type="text" name="userEmail" class="form-control" id="floatingMail" placeholder="이메일을 입력해 주세요."
+          	readonly value="${infoMemberDto.email }"
+           />
         </div>
 
         <div class="input-group mb-3">
-          <input type="text" class="form-control" id="zonecode" placeholder="우편번호" name="zonecode" readonly />
+          <input type="text" class="form-control" id="zonecode" placeholder="우편번호" name="zonecode" 
+          readonly
+          value="${infoMemberDto.zonecode }"
+           />
           <button class="btn btn-secondary" type="button" id="button-addon2" onclick="searchZonecode()">우편번호</button>
         </div>
         <div class="mb-3">
           <label for="floatingAddress">Address</label>
-          <input type="text" name="userAddress" class="form-control address" id="floatingAddress" placeholder="주소를 입력해 주세요." />
+          <input type="text" name="userAddress" class="form-control address" id="floatingAddress" placeholder="주소를 입력해 주세요."
+          	value="${infoMemberDto.address }"
+           />
         </div>
         <div class="row mb-3 g-2">
           <div class="col">
-            <input type="text" class="form-control detailAddress" placeholder="상세주소" name="detailAddress" />
+            <input type="text" class="form-control detailAddress" placeholder="상세주소" name="detailAddress"
+            value="${infoMemberDto.detailAddress }"
+             />
           </div>
           <div class="col">
-            <input type="text" class="form-control extraAddress" placeholder="참고사항" name="extraAddress" />
+            <input type="text" class="form-control extraAddress" placeholder="참고사항" name="extraAddress"
+            value="${infoMemberDto.extraAddress }"
+             />
           </div>
         </div>
         <div class="text-center">
-          <button type="submit" id="btnSubmit" class="btn btn-primary btn-lg">Join</button>
+          <button type="submit" id="btnSubmit" class="btn btn-primary btn-lg">MODIFY</button>
         </div>
       </div>
     </div>
@@ -56,39 +66,20 @@
 
   const joinForm = document.forms.joinForm;
   console.log(joinForm.elements.userId);
-  let isDoubleCheck = false;
-  btnSubmit.addEventListener("click", (e) => {
+    btnSubmit.addEventListener("click", (e) => {
     //e.preventDefault();
-    if (joinForm.elements.userId.value.trim() === "") {
-      e.preventDefault();
-      alert("아이디를 입력하세요.");
-      //return false;
-    } else if (isDoubleCheck === false) {
-      e.preventDefault();
-      alert("아이디 중복체크해주세요.");
-      joinForm.elements.userId.focus();
-    } else if (joinForm.elements.userPw.value.trim() === "") {
+    if (joinForm.elements.userPw.value.trim() === "") {
       e.preventDefault();
       alert("비밀번호를 입력하세요.");
       joinForm.elements.userPw.value = "";
       joinForm.elements.userPw.focus();
       //return false;
-    } else if (joinForm.elements.userPw.value !== joinForm.elements.userPw02.value) {
-      e.preventDefault();
-      alert("비밀번호가 맞지 않습니다.");
-      joinForm.elements.userPw02.value = "";
-      joinForm.elements.userPw02.focus();
-    } else if (joinForm.elements.userName.value.trim() === "") {
+    }  else if (joinForm.elements.userName.value.trim() === "") {
       e.preventDefault();
       alert("이름을 입력하세요.");
       joinForm.elements.userName.value = "";
       joinForm.elements.userName.focus();
       //return false;
-    } else if (joinForm.elements.userEmail.value.trim() === "") {
-      e.preventDefault();
-      alert("이메일을 입력하세요.");
-      joinForm.elements.userEmail.value = "";
-      joinForm.elements.userEmail.focus();
     } else if (joinForm.elements.userEmail.value.trim().match(regEmail) === null) {
       e.preventDefault();
       alert("이메일을 형식에 맞게 입력하세요.");
@@ -105,11 +96,9 @@
     }
     console.log(isDoubleCheck);
   });
-  
-  
   btnIdCheck.addEventListener("click", () => {
     //console.log(`idCheck.jsp?userId=${userId.value}`);
-    fetch("../member/idCheck?userId=" + userId.value)
+    fetch("idCheck.jsp?userId=" + userId.value)
       .then((response) => {
         return response.json();
       })
@@ -181,11 +170,4 @@
     }).open();
   }
 </script>
-<%@ include file="../include/footer.jsp"%>
-
-
-
-
-
-
-
+<%@ include file = "../include/footer.jsp"  %>
