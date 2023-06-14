@@ -3,7 +3,7 @@
 <%@ include file = "../include/header.jsp"  %>
 <!-- 1. controller 만들고
 2. memberDao에 메서드 만들기 modifyMember -->
-<form action="../member/modifyProcess" method="post" class="join" name="joinForm">
+<form action="modifyProcess" method="post" class="join" name="joinForm">
   <div class="container-sm mt-5">
     <div class="row justify-content-center">
       <div class="col-6">

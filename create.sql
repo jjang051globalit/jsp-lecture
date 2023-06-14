@@ -1,11 +1,20 @@
 -- 명령어 쓸 수 있음...
+SELECT * FROM RECYCLEBIN;
 
+FLASHBACK TABLE "member" TO BEFORE DROP;
 
 
 create table member (
-    id         varchar2(100),
-    name       varchar2(100),
-    password   varchar2(100)
+        id               varchar2(100) unique not null,   --중복방지  
+    --컬럼명          데이터타입      제약조건                                   
+    name             varchar2(100) not null,
+    -- name          varchar2(100)primary key,        --중복방지
+    password         VARCHAR2(100) not null,          --반드시 입력받아야 하는 값에는 not null을 넣어줄것    
+    email            VARCHAR2(100) not null,
+    zonecode         NUMBER(5)not null,
+    address          VARCHAR2(500)not null,
+    detailaddress    VARCHAR2(100),
+    extraaddress     VARCHAR2(100)
 );
 drop table member;
 
@@ -22,18 +31,26 @@ update member set password = '1234' where id = 'jjang051' and password = '5678';
 
 -- 자동증가  auto increament  my sql 
 create table board (
-    id        number primary key,
+    id        number primary key,  -- 글의 고유 번호
+    userId    varchar2(100) not null, -- member id를 통한 조회
     name      varchar2(100) not null,
     title     varchar2(300) not null,
     contents  varchar2(3000) not null,
     regdate   date default sysdate,
-    hit       number
+    hit       number,
+    constraint fk_userid foreign key(userId) references member (id)
+    -- constraint [내가정하는 포린키 이름] foreign key([현재 테이블의 컬럼명]) references [다른 테이블 면] ([다른 테이블의 컬럼명])
 );
 
-insert into board values (seq_board.nextval);
+drop table board;
 
+rollback;
 
+insert into board values (seq_board.nextval,'jjang051','장동건','제목입니다.','내용입니다.',sysdate,0);
 
+select * from board;
+
+select * from member;
 
 
 

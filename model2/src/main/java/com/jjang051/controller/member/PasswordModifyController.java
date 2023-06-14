@@ -1,4 +1,4 @@
-package com.jjang051.controller;
+package com.jjang051.controller.member;
 
 import java.io.IOException;
 

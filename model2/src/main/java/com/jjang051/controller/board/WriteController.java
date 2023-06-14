@@ -1,4 +1,4 @@
-package com.jjang051.controller;
+package com.jjang051.controller.board;
 
 import java.io.IOException;
 
@@ -9,17 +9,27 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/index/index")
-public class IndexController extends HttpServlet {
+@WebServlet("/board/write")
+public class WriteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public IndexController() {
+    public WriteController() {
         super();
     }
 
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		RequestDispatcher dispatcher = 
-				request.getRequestDispatcher("/WEB-INF/index/index.jsp");
+				request.getRequestDispatcher("/WEB-INF/board/write.jsp");
 		dispatcher.forward(request, response);
 	}
+
 }
+
+
+
+
+
+
+
+
+
