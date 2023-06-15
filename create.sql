@@ -48,6 +48,7 @@ rollback;
 
 insert into board values (seq_board.nextval,'jjang051','장동건','제목입니다.','내용입니다.',sysdate,0);
 
+
 select * from board;
 
 select * from member;
@@ -56,11 +57,20 @@ delete from board where id =  15;
 
 commit;
 
-select * from board where id = 14;
+rollback;
+
+select * from board order by id desc where id <= 105 and id > 90 ;
+
+select * from member;
+
+
 
 update board set hit = hit + 1 where id = 14;
 
 select * from board order by id desc;
+
+update board set  title = 'aaa', name = 'bbb', contents = 'cccc' where id = 22;
+
 
 
 

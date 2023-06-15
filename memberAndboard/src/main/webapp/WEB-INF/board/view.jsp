@@ -32,8 +32,10 @@
 	</table>
 	<div class="mt-5 text-center">
 		<a href="../board/write" class="btn btn-primary">WRITE</a>
-		<a href="../board/modify?id=${boardDto.id}" class="btn btn-primary">MODIFY</a>
-		<a href="../board/delete?id=${boardDto.id}" id="btnDelete" class="btn btn-danger">DELETE</a>
+		<c:if test="${loggedMember.id eq boardDto.userId}">
+			<a href="../board/modify?id=${boardDto.id}" class="btn btn-primary">MODIFY</a>
+			<a href="../board/delete?id=${boardDto.id}" id="btnDelete" class="btn btn-danger">DELETE</a>
+		</c:if>
 		<a href="../board/list" class="btn btn-danger">LIST</a>
 	</div>
 	<script>

@@ -59,9 +59,11 @@ public class BoardDao {
 	public ArrayList<BoardDto> getList() {
 		ArrayList<BoardDto> boardList = null;
 		getConnection();
-		String sql = "select * from board order by id desc";
+		String sql = "select * from board where id > ? and id <= ? order by id desc";
 		try {
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, 20);
+			pstmt.setInt(2, 30);
 			rs = pstmt.executeQuery();
 			boardList = new ArrayList<>();
 			while(rs.next()) {
