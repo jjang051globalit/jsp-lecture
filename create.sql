@@ -59,7 +59,7 @@ commit;
 
 rollback;
 
-select * from board order by id desc where id <= 105 and id > 90 ;
+select * from board where id > 20 and id <= 30 order by id desc;
 
 select * from member;
 
@@ -71,8 +71,15 @@ select * from board order by id desc;
 
 update board set  title = 'aaa', name = 'bbb', contents = 'cccc' where id = 22;
 
+-- spring boot 
 
 
+-- ¼­ºêÄõ¸® 
+select * from
+(select rownum as no,b.* from 
+    (select * from board order by id desc) b) where no >=1  and no <= 10;
+
+--select * from board order by id desc;
 
 
 
