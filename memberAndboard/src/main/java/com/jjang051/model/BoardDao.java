@@ -59,7 +59,7 @@ public class BoardDao {
 	public ArrayList<BoardDto> getList() {
 		ArrayList<BoardDto> boardList = null;
 		getConnection();
-		String sql = "select * from board";
+		String sql = "select * from board order by id desc";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
@@ -81,13 +81,23 @@ public class BoardDao {
 		return boardList;
 	}
 	public void updateHit(int id) {
+		getConnection();
 		String sql = "update board set hit = hit + 1 where id = ?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, id);
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
 	}
 	public BoardDto getView(int id) {
 		BoardDto boardDto = null;
+		updateHit(id);
 		getConnection();
 		String sql = "select * from board where id = ?";
-		updateHit(id);
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1,id);
@@ -106,6 +116,22 @@ public class BoardDao {
 			e.printStackTrace();
 		}
 		return boardDto;
+	}
+
+	public int deleteBoard(int id) {
+		int result = 0;
+		getConnection();
+		String sql = "delete from board where id = ?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1,id);
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+		return result;
 	}
 }
 

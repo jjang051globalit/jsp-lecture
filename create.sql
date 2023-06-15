@@ -52,6 +52,20 @@ select * from board;
 
 select * from member;
 
+delete from board where id =  15;
+
+commit;
+
+select * from board where id = 14;
+
+update board set hit = hit + 1 where id = 14;
+
+select * from board order by id desc;
+
+
+
+
+
 
 
 

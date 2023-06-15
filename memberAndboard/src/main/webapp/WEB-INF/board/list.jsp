@@ -24,7 +24,8 @@
 			<c:forEach items = "${boardList}" var = "boardDto">
 			<tr>
 				<td>${boardDto.id }</td>
-				<td><a href="../board/view?id=${boardDto.id }">${boardDto.title }</a></td>
+				<!-- query paramamter  get -->
+				<td><a href="../board/view?id=${boardDto.id}">${boardDto.title }</a></td>
 				<td>${boardDto.name }</td>
 				<td>${boardDto.regDate }</td>
 				<td>${boardDto.hit }</td>
@@ -32,6 +33,10 @@
 			</c:forEach>
 		</tbody>
 	</table>
+	<div class="mt-5">
+		<a href="" class="btn btn-primary">WRITE</a>
+		<!-- <a href="" class="btn btn-danger">DELETE</a> -->
+	</div>
 </div>
 <%@ include file="../include/footer.jsp"%>
 

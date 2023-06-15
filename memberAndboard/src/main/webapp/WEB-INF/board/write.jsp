@@ -20,6 +20,7 @@
 			<div class="text-center">
 	          <button type="submit" id="btnSubmit" class="btn btn-primary btn-lg">WRITE</button>
 	          <button type="reset" id="btnCancel" class="btn btn-secondary btn-lg">CANCEL</button>
+	          <a href="../board/list" class="btn btn-primary btn-lg">LIST</a>
 	        </div>
 		</form>
 	</div>

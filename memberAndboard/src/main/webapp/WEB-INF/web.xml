@@ -9,4 +9,14 @@
     <welcome-file>default.jsp</welcome-file>
     <welcome-file>default.htm</welcome-file>
   </welcome-file-list>
+  <servlet>
+    <description></description>
+    <display-name>BoarddeleteProcessController</display-name>
+    <servlet-name>BoarddeleteProcessController</servlet-name>
+    <servlet-class>com.jjang051.controller.board.BoarddeleteProcessController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>BoarddeleteProcessController</servlet-name>
+    <url-pattern>/BoarddeleteProcessController</url-pattern>
+  </servlet-mapping>
 </web-app>
