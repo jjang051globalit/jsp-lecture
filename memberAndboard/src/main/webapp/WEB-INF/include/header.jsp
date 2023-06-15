@@ -34,8 +34,8 @@
 					<c:otherwise>
 						<li class="nav-item"><a href="../member/logout" class="nav-link">logout</a></li>
 						<li class="nav-item"><a href="../member/info?userId=${loggedMember.id }" class="nav-link">${loggedMember.name }</a></li>
-						<!-- <li class="nav-item"><a href="../board/list" class="nav-link">게시판</a></li> -->						
-						<li class="nav-item"><a href="../board/write" class="nav-link">글쓰기</a></li>
+						<li class="nav-item"><a href="../board/list" class="nav-link">게시판</a></li>						
+						
 					</c:otherwise>	
 				</c:choose>
 				<%-- <c:if test="${empty loggedMember}">

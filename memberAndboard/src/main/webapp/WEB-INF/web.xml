@@ -19,4 +19,24 @@
     <servlet-name>BoarddeleteProcessController</servlet-name>
     <url-pattern>/BoarddeleteProcessController</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ModifyController2</display-name>
+    <servlet-name>ModifyController2</servlet-name>
+    <servlet-class>com.jjang051.controller.board.ModifyController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ModifyController2</servlet-name>
+    <url-pattern>/ModifyController2</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ModifyProcessController2</display-name>
+    <servlet-name>ModifyProcessController2</servlet-name>
+    <servlet-class>com.jjang051.controller.board.ModifyProcessController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ModifyProcessController2</servlet-name>
+    <url-pattern>/ModifyProcessController2</url-pattern>
+  </servlet-mapping>
 </web-app>

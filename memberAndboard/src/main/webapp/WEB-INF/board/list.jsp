@@ -34,7 +34,7 @@
 		</tbody>
 	</table>
 	<div class="mt-5">
-		<a href="" class="btn btn-primary">WRITE</a>
+		<a href="../board/write" class="btn btn-primary">WRITE</a>
 		<!-- <a href="" class="btn btn-danger">DELETE</a> -->
 	</div>
 </div>

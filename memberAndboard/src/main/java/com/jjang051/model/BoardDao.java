@@ -133,6 +133,26 @@ public class BoardDao {
 		}
 		return result;
 	}
+
+	public int modifyBoard(BoardDto boardDto) {
+		int result = 0;
+		getConnection();
+		String sql = "update board set  title = ?, name = ?, contents = ? where id = ?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, boardDto.getTitle());
+			pstmt.setString(2, boardDto.getName());
+			pstmt.setString(3, boardDto.getContents());
+			pstmt.setInt(4, boardDto.getId());
+			result = pstmt.executeUpdate();
+			System.out.println(result);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+		return result;
+	}
 }
 
 

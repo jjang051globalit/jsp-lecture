@@ -32,14 +32,18 @@
 	</table>
 	<div class="mt-5 text-center">
 		<a href="../board/write" class="btn btn-primary">WRITE</a>
-		<a href="" class="btn btn-primary">MODIFY</a>
+		<a href="../board/modify?id=${boardDto.id}" class="btn btn-primary">MODIFY</a>
 		<a href="../board/delete?id=${boardDto.id}" id="btnDelete" class="btn btn-danger">DELETE</a>
 		<a href="../board/list" class="btn btn-danger">LIST</a>
 	</div>
 	<script>
-		const btnDelete = documenet.querySelector("#btnDelete");
+		const btnDelete = document.querySelector("#btnDelete");
 		btnDelete.addEventListener("click",(e)=>{
 			e.preventDefault();
+			const isDelete = confirm("정말 삭제하시겠습니까?");
+			if(isDelete) {
+				location.href="../board/delete?id="+${boardDto.id};				
+			} 
 		});
 	</script>
 </div>
