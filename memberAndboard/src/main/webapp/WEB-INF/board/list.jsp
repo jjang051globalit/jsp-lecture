@@ -21,10 +21,10 @@
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach items="${boardList}" var="boardDto">
+			<c:forEach items="${boardList}" var="boardDto" varStatus="status">
 				<tr>
-					<td>${boardDto.id }</td>
-					<!-- query paramamter  get -->
+					
+					<td>${total -  pagePerList*(clickPage-1) - status.index }</td>
 					<td><a href="../board/view?id=${boardDto.id}">${boardDto.title }</a></td>
 					<td>${boardDto.name }</td>
 					<td>${boardDto.regDate }</td>
@@ -40,14 +40,19 @@
 					<span aria-hidden="true">&laquo;</span>
 				</a>
 			</li>
-			<!-- for(int i=1;i<=pageTotal; i++) -->
-			<c:forEach begin="1" end = "${pageTotal}" step="1" var="page" varStatus="status" >
-				<li class="page-item ${page == param.clickPage?'active':''}">
-				<a class="page-link" href="../board/list?start=${(page-1)*10+1}&end=${page*10}&clickPage=${page}">${page}</a></li>
+			<c:forEach begin="${pageStart }" end = "${pageEnd}" step="1" var="page" varStatus="status" >
+				<li class="page-item ${page == clickPage?'active':''}">
+					<a class="page-link" 
+					href="../board/list?start=${(page-1)*pagePerList+1}&end=${page*pagePerList}&clickPage=${page}">${page}</a>
+				</li>
 			</c:forEach>
-			<li class="page-item"><a class="page-link" href="#"
-				aria-label="Next"> <span aria-hidden="true">&raquo;</span>
-			</a></li>
+			<li class="page-item">
+				<a class="page-link" 
+				href="../board/list?clickPage=${pageStart+pageBlock }" 
+					aria-label="Next"> 
+					<span aria-hidden="true">&raquo;</span>
+				</a>
+			</li>
 		</ul>
 	</nav>
 

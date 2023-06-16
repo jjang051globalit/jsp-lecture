@@ -81,7 +81,7 @@ select * from
 
 --select * from board order by id desc;
 
-
+select count(*) from board;
 
 
 

@@ -57,6 +57,7 @@ public class BoardDao {
 	}
 
 	public ArrayList<BoardDto> getList(int start, int end) {
+		System.out.println("end==="+end);
 		ArrayList<BoardDto> boardList = null;
 		getConnection();
 		String sql = "select * from"
