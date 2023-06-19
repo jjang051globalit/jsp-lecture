@@ -38,7 +38,7 @@ public class MemberDao {
 	public int insertMember(MemberDto memberDto) {
 		int result = 0;
 		getConnection();
-		String sql =  "insert into member values(?,?,?,?,?,?,?,?)";
+		String sql =  "insert into member values(?,?,?,?,?,?,?,?,?,?)";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, memberDto.getId());
@@ -49,6 +49,8 @@ public class MemberDao {
 			pstmt.setString(6, memberDto.getAddress());
 			pstmt.setString(7, memberDto.getDetailAddress());
 			pstmt.setString(8, memberDto.getExtraAddress());
+			pstmt.setString(9,memberDto.getProfile());
+			pstmt.setString(10, memberDto.getRealProfile());
 			result = pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -75,8 +77,12 @@ public class MemberDao {
 				loggedMemberDto = new MemberDto();
 				String userId =  rs.getString("id");
 				String userName = rs.getString("name");
+				String realProfile = rs.getString("realProfile");
+				
 				loggedMemberDto.setId(userId);
 				loggedMemberDto.setName(userName);
+				loggedMemberDto.setRealProfile(realProfile);
+				
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

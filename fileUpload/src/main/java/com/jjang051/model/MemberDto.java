@@ -9,13 +9,16 @@ public class MemberDto {
 	private String address;
 	private String detailAddress;
 	private String extraAddress;
-	
+	private String profile;
+	private String realProfile;
+
 	public MemberDto() {
 		super();
+		// TODO Auto-generated constructor stub
 	}
 
 	public MemberDto(String id, String name, String password, String email, int zonecode, String address,
-			String detailAddress, String extraAddress) {
+			String detailAddress, String extraAddress, String profile, String realProfile) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -25,6 +28,8 @@ public class MemberDto {
 		this.address = address;
 		this.detailAddress = detailAddress;
 		this.extraAddress = extraAddress;
+		this.profile = profile;
+		this.realProfile = realProfile;
 	}
 
 	public String getId() {
@@ -91,16 +96,27 @@ public class MemberDto {
 		this.extraAddress = extraAddress;
 	}
 
+	public String getProfile() {
+		return profile;
+	}
+
+	public void setProfile(String profile) {
+		this.profile = profile;
+	}
+
+	public String getRealProfile() {
+		return realProfile;
+	}
+
+	public void setRealProfile(String realProfile) {
+		this.realProfile = realProfile;
+	}
+
 	@Override
 	public String toString() {
 		return "MemberDto [id=" + id + ", name=" + name + ", password=" + password + ", email=" + email + ", zonecode="
 				+ zonecode + ", address=" + address + ", detailAddress=" + detailAddress + ", extraAddress="
-				+ extraAddress + "]";
+				+ extraAddress + ", profile=" + profile + ", realProfile=" + realProfile + "]";
 	}
-	
+
 }
-
-
-
-
-

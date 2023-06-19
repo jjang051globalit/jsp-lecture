@@ -5,7 +5,7 @@ FLASHBACK TABLE "member" TO BEFORE DROP;
 
 
 create table member (
-        id               varchar2(100) unique not null,   --중복방지  
+    id               varchar2(100) unique not null,   --중복방지  
     --컬럼명          데이터타입      제약조건                                   
     name             varchar2(100) not null,
     -- name          varchar2(100)primary key,        --중복방지
@@ -16,6 +16,12 @@ create table member (
     detailaddress    VARCHAR2(100),
     extraaddress     VARCHAR2(100)
 );
+alter table member add profile varchar2(100);
+alter table member add realprofile varchar2(100);
+
+
+
+
 drop table member;
 
 insert into member (id,name,password) values ('jjang051','장성호','1234');

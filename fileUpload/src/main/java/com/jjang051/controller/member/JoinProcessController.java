@@ -44,14 +44,18 @@ public class JoinProcessController extends HttpServlet {
 		String encoding = "utf-8";
 
 		int fileSize = 1024 * 1024 * 10;
-		String savePath = "C:\\Users\\y\\Desktop\\upload";
-		File currentDir = new File(savePath);
+		String savePath = "upload";
+		ServletContext  context = this.getServletContext();
+		String realPath = context.getRealPath(savePath);
 		
+		File currentDir = new File(realPath);
+		if(!currentDir.exists()) {
+			currentDir.mkdir();
+		}
+		System.out.println("currentDir==="+currentDir);
 		DefaultFileRenamePolicy fileRenamePolicy = new DefaultFileRenamePolicy();
-		
-		MultipartRequest multipartRequest = new MultipartRequest(request,savePath,fileSize,encoding,
+		MultipartRequest multipartRequest = new MultipartRequest(request,realPath,fileSize,encoding,
 				fileRenamePolicy);
-		
 		String userId = multipartRequest.getParameter("userId");
 		String userPw = multipartRequest.getParameter("userPw");
 		String userName = multipartRequest.getParameter("userName");
@@ -75,6 +79,8 @@ public class JoinProcessController extends HttpServlet {
 		memberDto.setExtraAddress(extraAddress);
 		memberDto.setDetailAddress(detailAddress);
 		memberDto.setEmail(userEmail);
+		memberDto.setProfile(originalFile);
+		memberDto.setRealProfile(renameFile);
 
 		System.out.println(memberDto);
 
