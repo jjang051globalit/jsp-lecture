@@ -35,7 +35,7 @@ create table board (
     userId    varchar2(100) not null, -- member id를 통한 조회
     name      varchar2(100) not null,
     title     varchar2(300) not null,
-    contents  varchar2(3000) not null,
+    contents  clob not null,
     regdate   date default sysdate,
     hit       number,
     constraint fk_userid foreign key(userId) references member (id)
@@ -46,10 +46,11 @@ drop table board;
 
 rollback;
 
-insert into board values (seq_board.nextval,'jjang051','장동건','제목입니다.','내용입니다.',sysdate,0);
+insert into board values (seq_board.nextval,'jjang051','장동건','제목입니다.','내용입니다.',sysdate,0,'jjang051');
 
+select rownum,board.* from board;
 
-select * from board;
+select * from board  where id < 105 and id > 95 order by id desc;
 
 select * from member;
 
@@ -63,7 +64,7 @@ select * from board where id > 20 and id <= 30 order by id desc;
 
 select * from member;
 
-
+select * from board;
 
 update board set hit = hit + 1 where id = 14;
 
@@ -75,13 +76,24 @@ update board set  title = 'aaa', name = 'bbb', contents = 'cccc' where id = 22;
 
 
 -- 서브쿼리 
-select * from
-(select rownum as no,b.* from 
-    (select * from board order by id desc) b) where no >=1  and no <= 10;
+--select * from
+--(select rownum as no,b.* from 
+--    (select * from board order by id desc) b) where no >=1  and no <= 10;
 
 --select * from board order by id desc;
+select * from
+    (select rownum as no,b.* from
+    (select * from board order by id desc) b) 
+    where no >=1 and no<=10;
 
-select count(*) from board;
+select count(*) as total from board;
+
+ALTER TABLE BOARD  MODIFY (CONTENTS CLOB );
+
+--alter table board modify contents CLOB;
+
+
+
 
 
 

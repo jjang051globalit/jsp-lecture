@@ -1,52 +1,67 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%> 
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ include file="../include/header.jsp"%>
-<form action="../member/joinProcess" method="post" class="join" name="joinForm">
-  <div class="container-sm mt-5">
-    <div class="row justify-content-center">
-      <div class="col-6">
-        <div class="input-group mb-3">
-          <input type="text" name="userId" class="form-control userId" id="floatingInput" placeholder="아이디를 입력해 주세요." />
-          <button class="btn btn-secondary" type="button" id="btnIdCheck">ID중복체크</button>
-        </div>
-        <div class="mb-3">
-          <label for="floatingPassword">Password</label>
-          <input type="password" name="userPw" class="form-control" id="floatingPassword" placeholder="Password" />
-        </div>
-        <div class="mb-3">
-          <label for="floatingPassword02">Password 확인</label>
-          <input type="password" name="userPw02" class="form-control" id="floatingPassword02" placeholder="Password" />
-        </div>
-        <div class="mb-3">
-          <label for="floatingName">Name</label>
-          <input type="text" name="userName" class="form-control" id="floatingName" placeholder="이름을 입력해 주세요." />
-        </div>
-        <div class="mb-3">
-          <label for="floatingMail">Email</label>
-          <input type="text" name="userEmail" class="form-control" id="floatingMail" placeholder="이메일을 입력해 주세요." />
-        </div>
-
-        <div class="input-group mb-3">
-          <input type="text" class="form-control" id="zonecode" placeholder="우편번호" name="zonecode" readonly />
-          <button class="btn btn-secondary" type="button" id="button-addon2" onclick="searchZonecode()">우편번호</button>
-        </div>
-        <div class="mb-3">
-          <label for="floatingAddress">Address</label>
-          <input type="text" name="userAddress" class="form-control address" id="floatingAddress" placeholder="주소를 입력해 주세요." />
-        </div>
-        <div class="row mb-3 g-2">
-          <div class="col">
-            <input type="text" class="form-control detailAddress" placeholder="상세주소" name="detailAddress" />
-          </div>
-          <div class="col">
-            <input type="text" class="form-control extraAddress" placeholder="참고사항" name="extraAddress" />
-          </div>
-        </div>
-        <div class="text-center">
-          <button type="submit" id="btnSubmit" class="btn btn-primary btn-lg">Join</button>
-        </div>
-      </div>
-    </div>
-  </div>
+<form action="../member/joinProcess" method="post" class="join"	name="joinForm" enctype="multipart/form-data">
+	
+	<div class="container-sm mt-5">
+		<div class="row justify-content-center">
+			<div class="col-6">
+				<div class="input-group mb-3">
+					<input type="text" name="userId" class="form-control userId"
+						id="floatingInput" placeholder="아이디를 입력해 주세요." />
+					<button class="btn btn-secondary" type="button" id="btnIdCheck">ID중복체크</button>
+				</div>
+				<div class="mb-3">
+					<label for="floatingPassword">Password</label> <input
+						type="password" name="userPw" class="form-control"
+						id="floatingPassword" placeholder="Password" />
+				</div>
+				<div class="mb-3">
+					<label for="floatingPassword02">Password 확인</label> <input
+						type="password" name="userPw02" class="form-control"
+						id="floatingPassword02" placeholder="Password" />
+				</div>
+				<div class="mb-3">
+					<label for="floatingName">Name</label> <input type="text"
+						name="userName" class="form-control" id="floatingName"
+						placeholder="이름을 입력해 주세요." />
+				</div>
+				<div class="mb-3">
+					<label for="floatingMail">Email</label> <input type="text"
+						name="userEmail" class="form-control" id="floatingMail"
+						placeholder="이메일을 입력해 주세요." />
+				</div>
+				<div class="mb-3">
+					<label for="profile" class="form-label">profile</label> 
+					<input class="form-control" type="file" id="profile" name="profile">
+				</div>
+				<div class="input-group mb-3">
+					<input type="text" class="form-control" id="zonecode"
+						placeholder="우편번호" name="zonecode" readonly />
+					<button class="btn btn-secondary" type="button" id="button-addon2"
+						onclick="searchZonecode()">우편번호</button>
+				</div>
+				<div class="mb-3">
+					<label for="floatingAddress">Address</label> <input type="text"
+						name="userAddress" class="form-control address"
+						id="floatingAddress" placeholder="주소를 입력해 주세요." />
+				</div>
+				<div class="row mb-3 g-2">
+					<div class="col">
+						<input type="text" class="form-control detailAddress"
+							placeholder="상세주소" name="detailAddress" />
+					</div>
+					<div class="col">
+						<input type="text" class="form-control extraAddress"
+							placeholder="참고사항" name="extraAddress" />
+					</div>
+				</div>
+				<div class="text-center">
+					<button type="submit" id="btnSubmit" class="btn btn-primary btn-lg">Join</button>
+				</div>
+			</div>
+		</div>
+	</div>
 </form>
 <script>
   const regEmail = /^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
