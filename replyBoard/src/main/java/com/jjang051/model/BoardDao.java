@@ -39,8 +39,7 @@ public class BoardDao {
 	public int updateRelevel(BoardDto boardDto) {
 		int result = 0;
 		getConnection();
-		String sql = "update replyboard set relevel = relevel + 1"+
-		"where regroup = ? and relevel > ?";
+		String sql = "update replyboard set relevel = relevel + 1 where regroup = ? and relevel > ?";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1,boardDto.getRegroup());
@@ -73,7 +72,7 @@ public class BoardDao {
 		int max = getMaxRegroup();
 		//max++;
 		getConnection();
-		String sql = "insert into replyboard values(seq_replyboard.nextval,?,?,?,?,sysdate,0,?,?,?)";
+		String sql = "insert into replyboard values(seq_replyboard.nextval,?,?,?,?,sysdate,0,?,?,?,1)";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, boardDto.getUserId());
@@ -117,6 +116,13 @@ public class BoardDao {
 				boardDto.setContents(rs.getString("contents"));
 				boardDto.setRegDate(rs.getString("regDate"));
 				boardDto.setHit(rs.getInt("hit"));
+				boardDto.setRegroup(rs.getInt("regroup"));
+				boardDto.setRelevel(rs.getInt("relevel"));
+				boardDto.setRestep(rs.getInt("restep"));
+				boardDto.setAvailable(rs.getInt("available"));
+				
+				
+				
 				boardList.add(boardDto);
 			}
 			System.out.println(boardList.get(0).getName());
@@ -162,6 +168,8 @@ public class BoardDao {
 				boardDto.setRegroup(rs.getInt("regroup"));
 				boardDto.setRelevel(rs.getInt("relevel"));
 				boardDto.setRestep(rs.getInt("restep"));
+				boardDto.setAvailable(rs.getInt("available"));
+				
 				
 			}
 		} catch (Exception e) {
@@ -173,7 +181,8 @@ public class BoardDao {
 	public int deleteBoard(int id) {
 		int result = 0;
 		getConnection();
-		String sql = "delete from replyboard where id = ?";
+		//String sql = "delete from replyboard where id = ?";
+		String sql = "update replyboard set available = 0 where id = ?";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1,id);
@@ -227,7 +236,7 @@ public class BoardDao {
 	public int replyBoard(BoardDto boardDto) {
 		int result = 0;
 		getConnection();
-		String sql = "insert into replyboard values(seq_replyboard.nextval,?,?,?,?,sysdate,0,?,?,?)";
+		String sql = "insert into replyboard values(seq_replyboard.nextval,?,?,?,?,sysdate,0,?,?,?,1)";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, boardDto.getUserId());
@@ -235,8 +244,8 @@ public class BoardDao {
 			pstmt.setString(3, boardDto.getTitle());
 			pstmt.setString(4, boardDto.getContents());
 			pstmt.setInt(5, boardDto.getRegroup());
-			pstmt.setInt(6, boardDto.getRelevel()+1);
-			pstmt.setInt(7, boardDto.getRestep()+1);
+			pstmt.setInt(6, boardDto.getRelevel());
+			pstmt.setInt(7, boardDto.getRestep());
 			result = pstmt.executeUpdate();
 			System.out.println(result);
 		} catch (Exception e) {

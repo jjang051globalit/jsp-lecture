@@ -111,6 +111,7 @@ create table replyboard (
     regroup     number not null,
     relevel     number not null,
     restep      number not null,
+    available   number(1) default 1,
     constraint fk02_userid foreign key(userId) references member (id)
     -- constraint [내가정하는 포린키 이름] foreign key([현재 테이블의 컬럼명]) references [다른 테이블 면] ([다른 테이블의 컬럼명])
 );
@@ -121,5 +122,23 @@ select   nvl( max(regroup),0 ) as regroupmax from replyboard;
 
 select * from replyboard;
 
+-- 원글에 대한 댓글을 쓸때 내가 가진 regroup안의 relevel은 1 증가시킨다......
+
+
+update replyboard set relevel=relevel+1 where regroup = 3 and relevel > 0;
+
+rollback;
+
+select rownum as no, b.* from (
+    select * from replyboard order by regroup desc, relevel asc
+) b;
+
+delete from replyboard;
+commit;
+
+
+update replyboard set relevel = relevel + 1 where regroup = 4 and relevel > 1;
+
+rollback;
 
 

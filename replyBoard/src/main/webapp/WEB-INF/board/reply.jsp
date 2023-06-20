@@ -3,10 +3,10 @@
 <%@ include file="../include/header.jsp"%>
 <div class="container-sm mt-5">
 	<form action="../board/replyProcess" method="post">
-		<input type="hidden" name="userId" value="${loggedMember.id }">
-		<input type="hidden" name="regroup" value="${param.regroup }">
-		<input type="hidden" name="relevel" value="${param.relevel }">
-		<input type="hidden" name="restep" value="${param.restep }">
+		<input type="text" name="userId" value="${loggedMember.id }">
+		<input type="text" name="regroup" value="${param.regroup }">
+		<input type="text" name="relevel" value="${param.relevel }">
+		<input type="text" name="restep" value="${param.restep }">
 		<div class="mb-3">
 			<label for="title" class="form-label">제목</label> 
 			<input type="text"	class="form-control" name="title" id="title" placeholder="제목을 입력하세요.">

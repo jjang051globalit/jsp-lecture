@@ -19,24 +19,3 @@
   object-position: center;
   border: 1px solid #999;
 }
-
-.profileBox {
-	display:flex;
-	flex-direction:column;
-	justify-content:center;
-	align-items:center;
-	text-align:center;
-}
-
-.gnb {
-	align-items:center;
-}
-
-
-
-
-
-
-
-
-

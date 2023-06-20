@@ -32,6 +32,10 @@ public class ReplyProcessController extends HttpServlet {
 		int restep = Integer.parseInt(request.getParameter("restep"));
 		
 		BoardDto boardDto = new BoardDto();
+		boardDto.setRegroup(regroup);
+		boardDto.setRelevel(relevel);
+		boardDto.setRestep(restep);
+		
 		
 		boardDao.updateRelevel(boardDto);
 		

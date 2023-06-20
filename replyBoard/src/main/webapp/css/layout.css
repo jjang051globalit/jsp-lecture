@@ -21,22 +21,45 @@
 }
 
 .profileBox {
-	display:flex;
-	flex-direction:column;
-	justify-content:center;
-	align-items:center;
-	text-align:center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 
 .gnb {
-	align-items:center;
+  align-items: center;
 }
 
+.step:before {
+  content: "\f132";
+  display: inline-block;
+  margin-right: 10px;
+  font-family: "bootstrap-icons";
+}
+.step1 {
+  padding-left: 0px;
+}
+.step1:before {
+  display: none;
+}
+.step2 {
+  padding-left: 20px;
+}
+.step3 {
+  padding-left: 40px;
+}
+.step4 {
+  padding-left: 60px;
+}
+.step5 {
+  padding-left: 80px;
+}
 
-
-
-
-
-
-
-
+.notAvailable {
+  cursor: default;
+  color: #999;
+  text-decoration: none;
+  pointer-events: none;
+}

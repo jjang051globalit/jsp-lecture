@@ -1,5 +1,6 @@
 package com.jjang051.model;
 
+//lombok
 public class BoardDto {
 	private int id;
 	private String userId;
@@ -11,14 +12,17 @@ public class BoardDto {
 	private int regroup;
 	private int relevel;
 	private int restep;
+	private int available;
+	
+
+	
 
 	public BoardDto() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public BoardDto(int id, String userId, String name, String title, String contents, String regDate, int hit,
-			int regroup, int relevel, int restep) {
+			int regroup, int relevel, int restep, int available) {
 		super();
 		this.id = id;
 		this.userId = userId;
@@ -30,6 +34,8 @@ public class BoardDto {
 		this.regroup = regroup;
 		this.relevel = relevel;
 		this.restep = restep;
+		this.available = available;
+		
 	}
 
 	public int getId() {
@@ -111,12 +117,20 @@ public class BoardDto {
 	public void setRestep(int restep) {
 		this.restep = restep;
 	}
+	public int getAvailable() {
+		return available;
+	}
+
+	public void setAvailable(int available) {
+		this.available = available;
+	}
 
 	@Override
 	public String toString() {
 		return "BoardDto [id=" + id + ", userId=" + userId + ", name=" + name + ", title=" + title + ", contents="
 				+ contents + ", regDate=" + regDate + ", hit=" + hit + ", regroup=" + regroup + ", relevel=" + relevel
-				+ ", restep=" + restep + "]";
+				+ ", restep=" + restep + ", available=" + available + "]";
 	}
+	
 
 }

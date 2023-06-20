@@ -16,3 +16,48 @@
   object-position: center;
   border: 1px solid #999;
 }
+
+.profileBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.gnb {
+  align-items: center;
+}
+
+.step {
+  &:before {
+    content: "\F132";
+    display: inline-block;
+    margin-right: 10px;
+    font-family: "bootstrap-icons";
+  }
+  &1 {
+    padding-left: 0px;
+    &:before {
+      display: none;
+    }
+  }
+  &2 {
+    padding-left: 20px;
+  }
+  &3 {
+    padding-left: 40px;
+  }
+  &4 {
+    padding-left: 60px;
+  }
+  &5 {
+    padding-left: 80px;
+  }
+}
+.notAvailable {
+  cursor: default;
+  color: #999;
+  text-decoration: none;
+  pointer-events: none;
+}

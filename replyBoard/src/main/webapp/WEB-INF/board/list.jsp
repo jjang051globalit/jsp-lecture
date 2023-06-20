@@ -25,7 +25,16 @@
 				<tr>
 					
 					<td>${pageDto.total - pageDto.pagePerList*(clickPage-1) - status.index }</td>
-					<td><a href="../board/view?id=${boardDto.id}&clickPage=${clickPage}">${boardDto.title }</a></td>
+					<td>
+						<c:choose>
+							<c:when test="${boardDto.available eq 1 }">
+								<a href="../board/view?id=${boardDto.id}&clickPage=${clickPage}" class="step step${boardDto.restep }">${boardDto.title }</a>
+							</c:when>
+							<c:otherwise>
+								<a href="" class="step step${boardDto.restep } notAvailable">삭제된 글입니다.</a>
+							</c:otherwise>
+						</c:choose>
+					</td>
 					<td>${boardDto.name }</td>
 					<td>${boardDto.regDate }</td>
 					<td>${boardDto.hit }</td>
