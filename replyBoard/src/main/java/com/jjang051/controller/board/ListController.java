@@ -7,7 +7,9 @@ import java.util.ArrayList;
 
 import com.jjang051.model.BoardDao;
 import com.jjang051.model.BoardDto;
+import com.jjang051.model.MemberDto;
 import com.jjang051.model.PageDto;
+import com.jjang051.utils.ScriptWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -15,6 +17,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 @WebServlet("/board/list")
 public class ListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -25,6 +28,10 @@ public class ListController extends HttpServlet {
 
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// board 테이블의 row값을 가지고 오기....
+		
+		HttpSession session = request.getSession();
+		MemberDto loggedMember = (MemberDto)session.getAttribute("loggedMember");
+		
 		BoardDao boardDao = new BoardDao();
 		//String strStart = request.getParameter("start");
 		//String strEnd = request.getParameter("end");
@@ -69,7 +76,7 @@ public class ListController extends HttpServlet {
 		pageDto.setPageEnd(pageEnd);
 		pageDto.setPagePerList(pagePerList);
 		
-		ArrayList<BoardDto> boardList = boardDao.getList(start,end);
+		ArrayList<BoardDto> boardList = boardDao.getList();
 		request.setAttribute("clickPage", clickPage);
 		request.setAttribute("boardList", boardList);
 //		request.setAttribute("pageTotal", pageTotal);
@@ -80,9 +87,14 @@ public class ListController extends HttpServlet {
 //		request.setAttribute("pagePerList", (int)pagePerList);
 		request.setAttribute("pageDto", pageDto);
 		
-		RequestDispatcher dispatcher = 
-				request.getRequestDispatcher("/WEB-INF/board/list.jsp");
-		dispatcher.forward(request, response);
+		if(loggedMember!=null) {
+		
+			RequestDispatcher dispatcher = 
+					request.getRequestDispatcher("/WEB-INF/board/list.jsp");
+			dispatcher.forward(request, response);
+		} else {
+			ScriptWriter.alertAndNext(response, "로그인 먼저 하세요.", "../member/login");
+		}
 	}
 }
 

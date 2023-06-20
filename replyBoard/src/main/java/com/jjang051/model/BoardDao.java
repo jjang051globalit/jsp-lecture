@@ -44,7 +44,7 @@ public class BoardDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1,boardDto.getRegroup());
-			pstmt.setInt(1,boardDto.getRelevel());
+			pstmt.setInt(2,boardDto.getRelevel());
 			result = pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -55,7 +55,7 @@ public class BoardDao {
 	public int getMaxRegroup() {
 		int result = 0;
 		getConnection();
-		String sql = "select nvl( max(regroup),1) as regroupmax from replyboard";
+		String sql = "select nvl( max(regroup),0) as regroupmax from replyboard";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
@@ -71,7 +71,7 @@ public class BoardDao {
 	public int writeBoard(BoardDto boardDto) {
 		int result = 0;
 		int max = getMaxRegroup();
-		max++;
+		//max++;
 		getConnection();
 		String sql = "insert into replyboard values(seq_replyboard.nextval,?,?,?,?,sysdate,0,?,?,?)";
 		try {
@@ -80,7 +80,7 @@ public class BoardDao {
 			pstmt.setString(2, boardDto.getName());
 			pstmt.setString(3, boardDto.getTitle());
 			pstmt.setString(4, boardDto.getContents());
-			pstmt.setInt(5, max);
+			pstmt.setInt(5, max+1);
 			pstmt.setInt(6, 1);
 			pstmt.setInt(7, 1);
 			result = pstmt.executeUpdate();
@@ -93,7 +93,7 @@ public class BoardDao {
 		return result;
 	}
 
-	public ArrayList<BoardDto> getList(int start, int end) {
+	public ArrayList<BoardDto> getList() {
 		ArrayList<BoardDto> boardList = null;
 		getConnection();
 //		String sql = "select * from"
@@ -235,8 +235,8 @@ public class BoardDao {
 			pstmt.setString(3, boardDto.getTitle());
 			pstmt.setString(4, boardDto.getContents());
 			pstmt.setInt(5, boardDto.getRegroup());
-			pstmt.setInt(6, boardDto.getRelevel());
-			pstmt.setInt(7, boardDto.getRestep());
+			pstmt.setInt(6, boardDto.getRelevel()+1);
+			pstmt.setInt(7, boardDto.getRestep()+1);
 			result = pstmt.executeUpdate();
 			System.out.println(result);
 		} catch (Exception e) {
