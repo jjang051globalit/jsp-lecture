@@ -37,11 +37,25 @@
 						<li class="nav-item"><a href="../member/logout" class="nav-link">logout</a></li>
 						<li class="nav-item">
 							<a href="../member/info?userId=${loggedMember.id }" class="nav-link">
-								<div class="profileBox"><img src="${pageContext.request.contextPath }/upload/${loggedMember.realProfile }"
-								 class="profile"
-								>
-								${loggedMember.name }
-							</div>
+								<c:choose>
+									<c:when test="${loggedMember.realProfile eq null }">
+										<div class="profileBox">
+											<img 
+											src="${pageContext.request.contextPath }/upload/account.png"
+								 			class="profile">
+											${loggedMember.name }
+										</div>9
+									</c:when>
+									<c:otherwise>
+										<div class="profileBox">
+											<img 
+											src="${pageContext.request.contextPath }/upload/${loggedMember.realProfile }"
+								 			class="profile">
+											${loggedMember.name }
+										</div>	
+									</c:otherwise>
+								</c:choose>
+								
 							</a>
 						</li>
 						<li class="nav-item"><a href="../board/list" class="nav-link">게시판</a></li>						

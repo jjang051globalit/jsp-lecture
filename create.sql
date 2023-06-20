@@ -60,6 +60,7 @@ select * from board  where id < 105 and id > 95 order by id desc;
 
 select * from member;
 
+
 delete from board where id =  15;
 
 commit;
@@ -99,8 +100,26 @@ ALTER TABLE BOARD  MODIFY (CONTENTS CLOB );
 --alter table board modify contents CLOB;
 
 
+create table replyboard (
+    id          number primary key,  -- 글의 고유 번호
+    userId      varchar2(100) not null, -- member id를 통한 조회
+    name        varchar2(100) not null,
+    title       varchar2(300) not null,
+    contents    clob not null,
+    regdate     date default sysdate,
+    hit         number,
+    regroup     number not null,
+    relevel     number not null,
+    restep      number not null,
+    constraint fk02_userid foreign key(userId) references member (id)
+    -- constraint [내가정하는 포린키 이름] foreign key([현재 테이블의 컬럼명]) references [다른 테이블 면] ([다른 테이블의 컬럼명])
+);
 
+drop table replyboard;
 
+select   nvl( max(regroup),0 ) as regroupmax from replyboard;
+
+select * from replyboard;
 
 
 
