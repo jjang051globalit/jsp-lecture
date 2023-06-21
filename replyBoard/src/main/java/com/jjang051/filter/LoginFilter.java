@@ -17,7 +17,7 @@ import com.jjang051.model.MemberDto;
 import com.jjang051.utils.ScriptWriter;
 
 
-@WebFilter("/*")
+@WebFilter("/board/*")
 public class LoginFilter extends HttpFilter implements Filter {
        
 
@@ -31,17 +31,19 @@ public class LoginFilter extends HttpFilter implements Filter {
 	}
 
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-		HttpServletRequest httpRequest = (HttpServletRequest) request;
-		HttpServletResponse httpResponse = (HttpServletResponse) response;
-		
-		HttpSession session = httpRequest.getSession(false);
-		System.out.println(session);
-//		MemberDto loggedMember = (MemberDto)session.getAttribute("loggedMember");
-//		if(loggedMember==null) {
-//			ScriptWriter.alertAndNext(httpResponse, "로그인", "../member/login");
-//		} else {
-//			chain.doFilter(request, response);
-//		}
+		 HttpServletRequest req=(HttpServletRequest)request;
+	      HttpSession session=req.getSession();
+	      MemberDto loggedMember=(MemberDto)session.getAttribute("loggedMember");
+	      
+	      //2. 만일 로그인된 상태라면 관여하지 않고 요청의 흐름을 이어가면 되고
+	      if(loggedMember != null) {
+	         chain.doFilter(request, response);
+	      }else {
+	         //3. 로그인된 상태가 아니라면 로그인 폼으로 리다일렉트 이동시킨다. ( HttpServletResponse 필요)
+	         HttpServletResponse res=(HttpServletResponse)response;
+	         String cPath=req.getContextPath();
+	         res.sendRedirect(cPath+"/member/login");
+	      }
 		
 	}
 

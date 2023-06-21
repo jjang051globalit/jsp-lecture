@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -29,7 +30,13 @@ public class InfoController extends HttpServlet {
 		String userId = memberDto.getId();
 		MemberDao memberDao = new MemberDao();
 		MemberDto infoMemberDto = memberDao.getMemberInfo(userId);
+		ServletContext  context = this.getServletContext();
+		String savePath = "upload";
+		String realPath = context.getRealPath(savePath);
 		request.setAttribute("infoMemberDto", infoMemberDto);
+		request.setAttribute("profile", infoMemberDto.getRealProfile());
+		System.out.println("profile==="+realPath+"\\"+infoMemberDto.getProfile());
+		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/member/info.jsp");
 		dispatcher.forward(request, response);
 	}

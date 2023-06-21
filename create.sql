@@ -141,4 +141,13 @@ update replyboard set relevel = relevel + 1 where regroup = 4 and relevel > 1;
 
 rollback;
 
+select * from replyboard order by regroup desc, relevel asc;
+
+
+select * from replyboard;
+
+select * from replyboard where contents like '%นใ%';
+
+
+
 

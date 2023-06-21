@@ -27,6 +27,14 @@
 				<th scope="row">우편번호</th>
 				<td>${infoMemberDto.zonecode }</td>
 			</tr>
+			<tr>
+				<th scope="row">우편번호</th>
+				<td>
+					<img src="${pageContext.request.contextPath }/upload/${loggedMember.realProfile }">
+					<span>${request.getServletContext().getRealPath()}</span>
+					<span>${infoMemberDto.realProfile }</span>
+				</td>
+			</tr>
 		</tbody>
 	</table>
 	<div class="mt-5">

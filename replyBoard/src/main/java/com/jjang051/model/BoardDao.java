@@ -52,6 +52,7 @@ public class BoardDao {
 	}
 	
 	public int getMaxRegroup() {
+		// 
 		int result = 0;
 		getConnection();
 		String sql = "select nvl( max(regroup),0) as regroupmax from replyboard";
@@ -66,7 +67,7 @@ public class BoardDao {
 		}
 		return result;
 	}
-	
+	//dao
 	public int writeBoard(BoardDto boardDto) {
 		int result = 0;
 		int max = getMaxRegroup();
@@ -254,6 +255,50 @@ public class BoardDao {
 			close();
 		}
 		return result;
+	}
+
+	public ArrayList<BoardDto> search(String category, String searchWord) {
+		ArrayList<BoardDto> searchList = null;
+		getConnection();
+		//컬럼명은 ? 못씀...
+		//컬럼며은 data binding 안됨...
+		// all 처리....
+		String sql = null;
+		String selectedCategory = null;
+		if(category.equals("all")) {
+			sql ="select * from replyboard where "+category+" like '%' || ? || '%'";
+		} else {
+			sql ="select * from replyboard where "+category+" like '%' || ? || '%'";
+		}
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			//pstmt.setString(1,category);
+			pstmt.setString(1,searchWord);
+			
+			rs = pstmt.executeQuery();
+			searchList = new ArrayList<>();
+			while(rs.next()) {
+				BoardDto boardDto = new BoardDto();
+				boardDto.setId(rs.getInt("id"));
+				boardDto.setUserId(rs.getString("userId"));
+				boardDto.setName(rs.getString("name"));
+				boardDto.setTitle(rs.getString("title"));
+				boardDto.setContents(rs.getString("contents"));
+				boardDto.setRegDate(rs.getString("regDate"));
+				boardDto.setHit(rs.getInt("hit"));
+				boardDto.setRegroup(rs.getInt("regroup"));
+				boardDto.setRelevel(rs.getInt("relevel"));
+				boardDto.setRestep(rs.getInt("restep"));
+				boardDto.setAvailable(rs.getInt("available"));
+				
+				searchList.add(boardDto);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return searchList;
 	}
 }
 

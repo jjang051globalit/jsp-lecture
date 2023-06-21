@@ -29,6 +29,7 @@ public class InfoController extends HttpServlet {
 		String userId = memberDto.getId();
 		MemberDao memberDao = new MemberDao();
 		MemberDto infoMemberDto = memberDao.getMemberInfo(userId);
+		System.out.println("infoMemberDto==="+infoMemberDto);
 		request.setAttribute("infoMemberDto", infoMemberDto);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/member/info.jsp");
 		dispatcher.forward(request, response);
