@@ -2,8 +2,7 @@ package com.jjang051.controller.board;
 
 import java.io.IOException;
 import java.util.ArrayList;
-
-
+import java.util.HashMap;
 
 import com.jjang051.model.BoardDao;
 import com.jjang051.model.BoardDto;
@@ -75,8 +74,12 @@ public class ListController extends HttpServlet {
 		pageDto.setPageStart(pageStart);
 		pageDto.setPageEnd(pageEnd);
 		pageDto.setPagePerList(pagePerList);
+		HashMap<String, Integer> pageMap = new HashMap<>();
+		pageMap.put("start",start);
+		pageMap.put("end",end);
 		
-		ArrayList<BoardDto> boardList = (ArrayList<BoardDto>)boardDao.getList();
+		
+		ArrayList<BoardDto> boardList = (ArrayList<BoardDto>)boardDao.getList(pageMap);
 		request.setAttribute("clickPage", clickPage);
 		request.setAttribute("boardList", boardList);
 //		request.setAttribute("pageTotal", pageTotal);

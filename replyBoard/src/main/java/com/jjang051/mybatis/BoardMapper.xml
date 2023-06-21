@@ -3,15 +3,43 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jjang051.mybatis">
-	<select id="getList" resultType="BoardDto">
-		select rownum as no, b.* from (
-		select * from replyboard order by regroup
-		desc, relevel asc
-		) b
+	<select id="getList" resultType="BoardDto" parameterType="HashMap">
+		<![CDATA[
+			select * from
+			(select rownum as no, b.* from (
+				select * from replyboard order by regroup desc, relevel asc
+			) b) where no >= #{start} and no <= #{end}
+		]]> 
 	</select>
+	<select id="getListBetween" resultType="BoardDto">
+		select * from
+		(select rownum as no, b.* from (
+			select * from replyboard order by regroup desc, relevel asc
+		) b) where no between 1 and 10 
+	</select>
+	
 	<select id="getView" resultType="BoardDto"
 		parameterType="Integer">
 		select * from replyboard where id = #{id}
+	</select>
+	<select id="search" parameterType="HashMap" resultType="BoardDto">
+		select * from replyboard where 
+			<choose> 
+				<when test="category=='name'">
+					(name     like '%' || #{searchWord} || '%')
+				</when>
+				<when test="category=='title'">
+					(title    like '%' || #{searchWord} || '%')
+				</when>
+				<when test="category=='contents'">
+					(contents like '%' || #{searchWord} || '%')
+				</when>
+				<when test="category=='all'">
+					(name     like '%' || #{searchWord} || '%') or 
+					(title    like '%' || #{searchWord} || '%') or 
+					(contents like '%' || #{searchWord} || '%')	
+				</when>
+			</choose>
 	</select>
 	<update id="updateHit" parameterType="Integer">
 		update replyboard set hit = hit + 1 where id = #{id}
@@ -19,6 +47,11 @@
 	<update id="deleteBoard" parameterType="int">
 		update replyboard set available = 0 where id = #{id}
 	</update>
+	<insert id="writeBoard" parameterType="BoardDto">
+		insert into replyboard values(
+		seq_replyboard.nextval,#{userId},#{name},#{title},#{contents},sysdate,0,
+		#{regroup},#{relevel},#{restep},1)
+	</insert>
 </mapper>
 
 

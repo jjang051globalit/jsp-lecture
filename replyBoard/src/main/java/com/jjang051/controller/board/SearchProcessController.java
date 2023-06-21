@@ -28,7 +28,7 @@ public class SearchProcessController extends HttpServlet {
 		String searchWord = request.getParameter("searchWord");
 		ArrayList<BoardDto> searchList = null;
 		BoardDao boardDao = new BoardDao();
-		searchList = boardDao.search(category,searchWord);
+		searchList = (ArrayList<BoardDto>)boardDao.search(category,searchWord);
 		request.setAttribute("searchList", searchList);
 		
 		
