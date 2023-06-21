@@ -24,6 +24,7 @@ public class ViewController extends HttpServlet {
 		
 		int id = Integer.parseInt(request.getParameter("id"));
 		BoardDao boardDao = new BoardDao();
+		//boardDao.updateHit(id);
 		BoardDto boardDto = boardDao.getView(id);
 		request.setAttribute("boardDto", boardDto);
 		RequestDispatcher dispatcher =   

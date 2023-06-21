@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jjang051.mybatis">
+	<select id="getList" resultType="BoardDto">
+		select rownum as no, b.* from (
+		select * from replyboard order by regroup
+		desc, relevel asc
+		) b
+	</select>
+	<select id="getView" resultType="BoardDto"
+		parameterType="Integer">
+		select * from replyboard where id = #{id}
+	</select>
+	<update id="updateHit" parameterType="Integer">
+		update replyboard set hit = hit + 1 where id = #{id}
+	</update>
+	<update id="deleteBoard" parameterType="int">
+		update replyboard set available = 0 where id = #{id}
+	</update>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

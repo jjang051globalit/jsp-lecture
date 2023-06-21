@@ -146,7 +146,11 @@ select * from replyboard order by regroup desc, relevel asc;
 
 select * from replyboard;
 
-select * from replyboard where contents like '%นใ%';
+select * from replyboard where name like '%ลย%';
+
+select * from replyboard where (name like '%ลย%') or (title like '%น๘%') or (contents like '%น๘%') ;
+
+
 
 
 
